@@ -2,12 +2,12 @@ import React, { useState } from "react"
 import "./login.css"
 import cloudLogo from "../../assets/clouds.png"
 import { useNavigate } from "react-router-dom"
-// import { useLogin } from "../../hooks/useLogin"
+import { useLogin } from "../../hooks/useLogin"
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const {login, error, isLoading} = useLogin();
+    const {login, error, isLoading} = useLogin();
 
     let navigate = useNavigate();
     const routeChange = () => {
@@ -18,9 +18,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // TODO
-        console.log("Submitted!")
-        // await login(email, password);
+        await login(email, password);
     }
 
     return(
@@ -37,7 +35,8 @@ const Login = () => {
                         <label className="font-semibold" htlmfor="password">Password</label>
                         <input className="border-2 w-full rounded-[5px] px-2 py-2" value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" />
                     </div>
-                    <button className="mt-10 mb-24 w-full font-extrabold text-lg text-white bg-sky-500 rounded-[6px] px-16 py-3" type="submit">Log In</button>
+                    <button className="mt-10 mb-24 w-full font-extrabold text-lg text-white bg-sky-500 rounded-[6px] px-16 py-3" type="submit" disabled={isLoading}>Log In</button>
+                    {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">{error}</div>}
                 </form>
                 <div className="mt-10 mb-10">
                     <p className="text-[#828282]">Not registered yet?</p>

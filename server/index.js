@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
+import userRoute from "./routes/userRoute.js"
 
 // Config
 dotenv.config()
@@ -13,14 +14,14 @@ app.use(express.json())
 app.use(helmet())
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
 app.use(morgan("common"))
-app.use(bodyParser.json())
+app.use(bodyParser.json()) 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
 // Routes
+app.use('/api/user', userRoute)
 
-
-// Mongoose Setup
+// Mongoose Setup & Server Start
 const PORT = process.env.PORT || 9000
 mongoose
 .connect(process.env.MONGO_URL, {

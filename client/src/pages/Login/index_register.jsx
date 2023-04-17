@@ -2,13 +2,13 @@ import React, { useState } from "react"
 import cloudLogo from '../../assets/clouds.png'
 import './login.css'
 import { useNavigate } from "react-router-dom"
-// import { useRegister } from "../../hooks/useRegister"
+import { useRegister } from "../../hooks/useRegister"
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    // const {register, error, isLoading} = useRegister();
+    const [username, setUserName] = useState('');
+    const {register, error, isLoading} = useRegister();
 
     let navigate = useNavigate();
     const routeChange = () =>{
@@ -19,9 +19,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        //TODO
-        console.log("Registered!")
-        // await register(name, email, password);
+        await register(username, email, password);
     }
 
     return(
@@ -32,7 +30,7 @@ const Register = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="name-container text-left text-[#828282]">
                         <label className="font-semibold" htlmfor="name">Username</label>
-                        <input className="mb-6 border-2 w-full rounded-[5px] px-2 py-2" value={name} onChange={(e) => setName(e.target.value)} id="name" name="name" />
+                        <input className="mb-6 border-2 w-full rounded-[5px] px-2 py-2" value={username} onChange={(e) => setUserName(e.target.value)} id="username" name="username" />
                     </div>
                     <div className="email-container text-left text-[#828282]">
                         <label className="font-semibold" htlmfor="email">Email</label>
@@ -42,7 +40,8 @@ const Register = () => {
                         <label className="font-semibold" htlmfor="password">Password</label>
                         <input className="border-2 w-full rounded-[5px] px-2 py-2" value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="password" name="password" />
                     </div>
-                    <button className="mt-10 mb-24 w-full font-extrabold text-lg text-white bg-sky-500 rounded-[6px] px-16 py-3" type="submit">Register</button>
+                    <button className="mt-10 mb-24 w-full font-extrabold text-lg text-white bg-sky-500 rounded-[6px] px-16 py-3" type="submit" disabled={isLoading}>Register</button>
+                    {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">{error}</div>}
                 </form>
                 <div className="mt-10 mb-10">
                     <p className="text-[#828282]">Already have an account?</p>
