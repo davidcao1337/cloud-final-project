@@ -1,17 +1,10 @@
 import './dashboard.css';
-import { useLogout } from "../../hooks/useLogout";
 
 const Dashboard = () => {
-    const { logout } = useLogout();
-
-    const handleClick = () => {
-        logout();
-      }
 
     return (
         <div>
-            <h1>Dashboard</h1>
-            <button onClick={handleClick}>Logout</button>
+            <h1 className="Title mt-5 mb-5 ml-5 font-bold text-3xl text-[#525252]">Dashboard</h1>
         </div>
     )
 }
