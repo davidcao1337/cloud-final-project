@@ -5,6 +5,7 @@ import Login from "./pages/Login/index_login";
 import Register from "./pages/Login/index_register";
 import Dashboard from "./pages/Dashboard";
 import DataPull from "./pages/DataPull";
+import DataUpload from "./pages/DataUpload";
 import Profile from "./pages/Profile";
 import "./index.css";
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/register" element={!user ? <Register /> : <Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
           <Route path="/datapull" element={user ? <DataPull /> : <Navigate to="/login" />} />
+          <Route path="/dataupload" element={user ? <DataUpload /> : <Navigate to="/login" />} />
           <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
         </Routes>
     </div>
