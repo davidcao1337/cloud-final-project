@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import userRoute from "./routes/userRoute.js"
+import dataRoute from "./routes/dataRoute.js"
 
 // Config
 dotenv.config()
@@ -20,6 +21,7 @@ app.use(cors())
 
 // Routes
 app.use('/api/user', userRoute)
+app.use('/api/data', dataRoute)
 
 // Mongoose Setup & Server Start
 const PORT = process.env.PORT || 9000
