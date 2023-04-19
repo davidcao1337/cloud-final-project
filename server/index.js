@@ -22,7 +22,7 @@ app.use(cors())
 app.use('/api/user', userRoute)
 
 // Mongoose Setup & Server Start
-const PORT = process.env.PORT || 9000
+const PORT = process.env.PORT || 1337
 mongoose
 .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
