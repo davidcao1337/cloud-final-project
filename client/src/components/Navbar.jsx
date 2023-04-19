@@ -13,6 +13,7 @@ const Navbar = () => {
         <div className="flex-1">
         <Link className="btn btn-ghost normal-case text-xl" to="/dashboard">Dashboard</Link>
         <Link className="btn btn-ghost normal-case text-xl" to="/datapull">Data Pull</Link>
+        <Link className="btn btn-ghost normal-case text-xl" to="/dataupload">Data Upload</Link>
         <Link className="btn btn-ghost normal-case text-xl" to="/profile">Profile</Link>
         </div>
         <div className="flex-none">
