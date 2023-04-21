@@ -2,7 +2,7 @@ import * as child_process from 'child_process';
 import * as path from 'path';
 
 const getData = async(req, res) => {
-    const { hshd_num } = req.params
+    const { hshd_num_selection, sort_selection } = req.params
 
     // Create file paths
     const __dirname = path.dirname(new URL(import.meta.url).pathname);
@@ -11,11 +11,13 @@ const getData = async(req, res) => {
     const transactionsFilePath = path.join(__dirname, 'data', '400_transactions.csv');
 
     // Execute python script
-    const childPython = child_process.spawn('python', ['data_analyze.py', householdFilePath, productsFilePath, transactionsFilePath, hshd_num]);
+    const childPython = child_process.spawn('python', [`${__dirname}/data_analyze.py`, householdFilePath, productsFilePath, transactionsFilePath, hshd_num_selection, sort_selection]);
+
+    let data = '';
 
     // Post python script execution
-    childPython.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`);
+    childPython.stdout.on('data', (chunk) => {
+        data += chunk;
     });
 
     childPython.stderr.on('data', (data) => {
@@ -24,10 +26,13 @@ const getData = async(req, res) => {
 
     childPython.on('close', (code) => {
         console.log(`child process exited with code ${code}`);
+        if (code === 0) {
+            // data is a JSON string
+            res.status(200).json(data)
+        } else {
+            res.status(500).json(data)
+        }
     });
-
-    // Return data (TODO)
-    // res.status(200).json()
 }
 
 export { getData }
