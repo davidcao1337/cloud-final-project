@@ -39,7 +39,7 @@ const getData = async(req, res) => {
     if (sort_selection === "BASKET_NUM") {
         filteredData.sort((a, b) => a.transactions[0].BASKET_NUM - b.transactions[0].BASKET_NUM)
     }
-    else if (sort_selection === "PURCHASE_") {
+    else if (sort_selection === "DATE") {
         filteredData.sort((a, b) => new Date(a.transactions[0].PURCHASE_) - new Date(b.transactions[0].PURCHASE_))
     }
     else if (sort_selection === "PRODUCT_NUM") {
