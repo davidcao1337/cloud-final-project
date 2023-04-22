@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import './datapull.css';
 
 const BASE_URL = 'http://localhost:1337'
-const regex = /\[.*?\]/s;
 
 const DataPull = () => {
     /* Test
-    const hshd_num_selection = "10"
+    const hshd_num_selection = 10
     const sort_selection = "BASKET_NUM"
 
     useEffect(() => {
@@ -15,9 +14,7 @@ const DataPull = () => {
             const json = await response.json()
 
             if(response.ok) {
-                // Regex to remove LOG messages from JSON
-                const jsonArr = json.match(regex)[0];
-                console.log(jsonArr)
+                console.log(json)
             }
 
             if(!response.ok) {
