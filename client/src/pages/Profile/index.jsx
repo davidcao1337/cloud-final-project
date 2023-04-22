@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react"
 import './profile.css';
 import DefaultAvatar from "../../assets/circle-user-solid.svg"
 
-const BASE_URL = 'http://localhost:1337'
+const BASE_URL = 'https://cloud-deploy-test-384518.uk.r.appspot.com:1337'
 
 const Profile = () => {
     var user_id = ""

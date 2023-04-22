@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import './datapull.css';
 
-const BASE_URL = 'http://localhost:1337'
+const BASE_URL = 'https://cloud-deploy-test-384518.uk.r.appspot.com:1337'
 
 const DataPull = () => {
-    /* Test
+    // Test
     const hshd_num_selection = 10
     const sort_selection = "BASKET_NUM"
 
@@ -24,7 +24,7 @@ const DataPull = () => {
 
         fetchData();
     }, [hshd_num_selection, sort_selection])
-    */
+
 
     return (
         <div>
