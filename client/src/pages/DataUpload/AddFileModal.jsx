@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import './dataupload.css';
+import axios, { Axios } from 'axios'
+
+const BASE_URL = 'http://localhost:1337'
 
 const FileModal= ( props ) => {
 
@@ -27,8 +30,39 @@ const FileModal= ( props ) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(selectedHouseholdsFile)
-        alert("hi")
+        // let data = new FormData();
+        // data.append( 'file', selectedHouseholdsFile );
+        // console.log(selectedHouseholdsFile)
+
+        // const response = await fetch(`${BASE_URL}/api/data/sarah/${selectedHouseholdsFile.name}`, {
+        //     method: 'POST',
+        //     body: selectedHouseholdsFile,
+        // });
+        // const json = await response.json()
+        // console.log(json)
+        let files = []
+        files.push(selectedHouseholdsFile)
+        files.push(selectedProductsFile)
+        files.push(selectedTransactionsFile)
+        const data = new FormData();
+        files.forEach((file, i) => {
+            data.append(`file-${i}`, file, file.name);
+        });
+
+        fetch(`${BASE_URL}/api/data/sarah`, {
+            method: 'POST',
+            body: data,
+        })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.error(err));
+        
+        // const response = await fetch('/api/dataupload', {
+        //     method: 'POST',
+        //     body: new FormData(setSelectedHouseholdsFile)
+        // });
+        // const json = await response.json()
+        // console.log(json)
 	};
 
     return (
@@ -39,7 +73,13 @@ const FileModal= ( props ) => {
                 <h3>Products</h3>
                 <input type="file" name="products" onChange={changeProductsHandler} />
                 <h3>Households</h3>
-                <input type="file" name="households" onChange={changeHouseholdsHandler} />
+                <input
+                    type="file"
+                    id="household"
+                    accept=".csv"
+                    onChange={changeHouseholdsHandler}
+                />
+                {/* <input type="file" name="households" onChange={changeHouseholdsHandler} /> */}
                 <h3>Transactions</h3>
                 <input type="file" name="transactions" onChange={changeTransactionsHandler} />
                 <div className="buttons-container flex flex-row">

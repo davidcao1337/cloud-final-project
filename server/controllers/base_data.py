@@ -3,6 +3,7 @@ import sys
 import json
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import asc, col, trim, regexp_replace
+from pyspark.sql.streaming import StreamingQuery
 
 os.environ['PYSPARK_PYTHON'] = sys.executable
 os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
@@ -11,8 +12,8 @@ spark._sc.setLogLevel("OFF")
 spark.sparkContext.setLogLevel("OFF")
 
 # Load household number selection & sort selection
-hshd_num_selection = int(sys.argv[4])
-sort_selection = sys.argv[5]
+hshd_num_selection = 10
+sort_selection = "BASKET_NUM"
 
 # Load data from csv files
 household_csv_file = 'C:\\Users\\hudso\\sarah\\UC\\Cloud\\400_households.csv'
@@ -59,21 +60,32 @@ transactions_df = transactions_df.withColumn('STORE_R', regexp_replace(col("STOR
 transactions_df = transactions_df.withColumn('WEEK_NUM', regexp_replace(col("WEEK_NUM"), " ", ""))
 transactions_df = transactions_df.withColumn('YEAR', regexp_replace(col("YEAR"), " ", ""))
 
-# Join Households & Transactions
+# # Join Households & Transactions
 househouldTrans_df = household_df.join(transactions_df, on=["HSHD_NUM"], how="inner")
+# househouldTrans_df.awaitTermination()
 
-# Join Households-Transactions & Products
+# # Join Households-Transactions & Products
 complete_df = househouldTrans_df.join(products_df, on=["PRODUCT_NUM"], how="inner")
 
-# Default sort by HSHD_NUM
+# # Default sort by HSHD_NUM
 complete_df = complete_df.orderBy(asc("HSHD_NUM"))
 
-# Data Pull for HSHD_SELECTION
+# # Data Pull for HSHD_SELECTION
 hshd_selection_df = complete_df.filter(col("HSHD_NUM") == hshd_num_selection)
 
-# Sort By Options (HSHD_NUM, BASKET_NUM, PURCHASE_DATE, PRODUCT_NUM, DEPARTMENT, COMMODITY)
+# Default sort by HSHD_NUM
+househouldTrans_df = househouldTrans_df.orderBy(asc("HSHD_NUM"))
+
+# Data Pull for HSHD_SELECTION
+hshd_selection_df = househouldTrans_df.filter(col("HSHD_NUM") == hshd_num_selection)
+
+# # Sort By Options (HSHD_NUM, BASKET_NUM, DATE, PRODUCT_NUM, DEPARTMENT, COMMODITY)
 hshd_selection_df.orderBy(asc(sort_selection))
 
 # Convert Dataframe to JSON and send to dataController
 json_data = hshd_selection_df.toJSON().map(lambda x: json.loads(x)).collect()
 print(json.dumps(json_data))
+
+# print(json_data)
+
+# complete_df.show()
