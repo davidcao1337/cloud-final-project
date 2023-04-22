@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './datapull.css';
 
-const BASE_URL = 'https://cloud-deploy-test-384518.uk.r.appspot.com:1337'
+const BASE_URL = 'https://cloud-backend-sbcb.onrender.com'
 
 const DataPull = () => {
     // Test
