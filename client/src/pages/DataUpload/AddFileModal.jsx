@@ -30,32 +30,12 @@ const FileModal= ( props ) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        alert("Your files have been uploaded!")
         // let data = new FormData();
         // data.append( 'file', selectedHouseholdsFile );
         // console.log(selectedHouseholdsFile)
 
-        // const response = await fetch(`${BASE_URL}/api/data/sarah/${selectedHouseholdsFile.name}`, {
-        //     method: 'POST',
-        //     body: selectedHouseholdsFile,
-        // });
-        // const json = await response.json()
-        // console.log(json)
-        let files = []
-        files.push(selectedHouseholdsFile)
-        files.push(selectedProductsFile)
-        files.push(selectedTransactionsFile)
-        const data = new FormData();
-        files.forEach((file, i) => {
-            data.append(`file-${i}`, file, file.name);
-        });
-
-        fetch(`${BASE_URL}/api/data/sarah`, {
-            method: 'POST',
-            body: data,
-        })
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.error(err));
+       
         
         // const response = await fetch('/api/dataupload', {
         //     method: 'POST',

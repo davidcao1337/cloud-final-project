@@ -2,7 +2,7 @@ import os
 import sys
 import json
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import asc, col, trim, regexp_replace
+from pyspark.sql.functions import asc, col, trim, regexp_replace, count
 from pyspark.sql.streaming import StreamingQuery
 
 os.environ['PYSPARK_PYTHON'] = sys.executable
@@ -73,4 +73,11 @@ complete_df = househouldTrans_df.join(products_df, on=["PRODUCT_NUM"], how="inne
 complete_df = complete_df.filter(complete_df.AGE_RANGE!='null')
 complete_df = complete_df.filter(complete_df.COMMODITY!='null')
 
-complete_df.show()
+complete_df = complete_df.drop('PRODUCT_NUM')
+complete_df = complete_df.drop('HSHD_NUM')
+
+result = complete_df.groupBy('COMMODITY').pivot('AGE_RANGE').agg(count("*"))
+
+result = result.drop('AGE_RANGE')
+
+result.show()

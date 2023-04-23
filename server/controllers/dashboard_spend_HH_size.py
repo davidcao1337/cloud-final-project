@@ -81,5 +81,7 @@ househouldTotalTrans_df = househouldTotalTrans_df.distinct()
 househouldSizeTotalTrans_df = househouldTotalTrans_df.groupBy('HH_SIZE').sum('TOTAL_SPENT')
 househouldSizeTotalTrans_df = househouldSizeTotalTrans_df.withColumnRenamed("sum(TOTAL_SPENT)", "HOUSEHOLD_DEMOGRAPHIC_SPENT")
 
-json_data = househouldSizeTotalTrans_df.toJSON().map(lambda x: json.loads(x)).collect()
-print(json.dumps(json_data))
+househouldSizeTotalTrans_df.show()
+
+# json_data = househouldSizeTotalTrans_df.toJSON().map(lambda x: json.loads(x)).collect()
+# print(json.dumps(json_data))
