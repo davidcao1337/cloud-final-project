@@ -15,7 +15,7 @@ function App() {
   const hideNavbar = location.pathname === '/login' || location.pathname === '/register';
 
   return (
-    <div className="app">
+    <div className="app w-screen h-screen flex flex-col">
         {hideNavbar ? null : <Navbar />}
         <Routes>
           <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />

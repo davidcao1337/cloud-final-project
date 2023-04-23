@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import QueryData from './DataQuery';
+import DataPullTable from './Table';
 import './datapull.css';
 
 const BASE_URL = 'http://localhost:1337'
