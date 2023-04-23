@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './dataupload.css';
 import axios, { Axios } from 'axios'
 
-const BASE_URL = 'https://cloud-deploy-test-384518.uk.r.appspot.com'
+const BASE_URL = 'https://cloud-backend-sqiw.onrender.com'
 
 const FileModal= ( props ) => {
 

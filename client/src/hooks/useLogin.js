@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from './useAuthContext'
 
-const BASE_URL = 'https://cloud-deploy-test-384518.uk.r.appspot.com'
+const BASE_URL = 'https://cloud-backend-sqiw.onrender.com'
 
 export const useLogin = () => {
     const [error, setError] = useState(null);
