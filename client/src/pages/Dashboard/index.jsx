@@ -107,7 +107,7 @@ const Dashboard = () => {
                 </div>
             </div>
             <div>
-                Do households spend less or more?: In the year 2020 it looked like higher households spent less over time
+                Do households spend less or more?: In the year 2020 it looked like higher households spent less overall
             </div>
             <div>
                 What categories are growing or shrinking with changing customer engagement? Toys and gifts
