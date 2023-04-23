@@ -4,7 +4,7 @@ import DataPullTable from './Table';
 import _ from 'lodash';
 import './datapull.css';
 
-const BASE_URL = 'http://localhost:1337'
+const BASE_URL = 'https://cloud-deploy-test-384518.uk.r.appspot.com'
 const regex = /\[.*?\]/s;
 
 const QueryData = ( props ) => {
